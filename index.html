@@ -80,10 +80,10 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#tarchetypes" class="anchor"></a>tarchetypes</h1></div>
 
-<p>The <code>tarchetypes</code> R package is a collection of general-purpose utilities for <a href="https://github.com/wlandau/targets"><code>targets</code></a>. These utilities concisely express common kinds of targets to help build more elegant pipelines.</p>
-<div id="example" class="section level2">
+<p>The <code>tarchetypes</code> R package is a collection of target and pipeline archetypes for the <a href="https://github.com/wlandau/targets"><code>targets</code></a> package. These archetypes are shorthand that makes it easier to read and write pipelines.</p>
+<div id="target-archetype-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<a href="#target-archetype-example" class="anchor"></a>Target archetype example</h2>
 <p>Consider the following R Markdown report.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">---</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>title<span class="op">:</span><span class="st"> </span>report</span>
@@ -138,11 +138,56 @@
 </pre></div>
 <p>Above, <code><a href="reference/tar_render.html">tar_render()</a></code> scans code chunks for mentions of targets in <code><a href="https://rdrr.io/pkg/targets/man/tar_load.html">tar_load()</a></code> and <code><a href="https://rdrr.io/pkg/targets/man/tar_read.html">tar_read()</a></code>, and it enforces the dependency relationships it finds. In our case, it reads <code>report.Rmd</code> and then forces <code>report</code> to depend on <code>dataset</code>. That way, <code><a href="https://rdrr.io/pkg/targets/man/tar_make.html">tar_make()</a></code> always processes <code>dataset</code> before <code>report</code>, and it automatically reruns <code>report.Rmd</code> whenever <code>dataset</code> changes.</p>
 </div>
+<div id="pipeline-archetype-example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pipeline-archetype-example" class="anchor"></a>Pipeline archetype example</h2>
+<p><a href="https://wlandau.github.io/tarchetypes/reference/tar_plan.html"><code>tar_plan()</code></a> is a version of <a href="https://wlandau.github.io/targets/reference/tar_pipeline.html"><code>tar_pipeline()</code></a> that looks and feels like <a href="https://docs.ropensci.org/drake/reference/drake_plan.html"><code>drake_plan()</code></a>. For simple targets with no configuration, you can write <code>target = command</code> instead of <code><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target(target, command)</a></code>. Ordinarily, pipelines in <code>_targets.R</code> are written like this:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_pipeline.html">tar_pipeline</a></span>(
+  <span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target</a></span>(
+    <span class="kw">raw_data_file</span>,
+    <span class="st">"data/raw_data.csv"</span>,
+    format = <span class="st">"file"</span>
+  ),
+  <span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target</a></span>(
+    <span class="kw">raw_data</span>,
+    <span class="fu">read_csv</span>(<span class="kw">raw_data_file</span>, col_types = <span class="fu">cols</span>())
+  ),
+  <span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target</a></span>(
+    <span class="kw">data</span>,
+    <span class="kw">raw_data</span> <span class="op">%&gt;%</span>
+      <span class="fu">mutate</span>(Ozone = <span class="fu">replace_na</span>(<span class="kw">Ozone</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">Ozone</span>, na.rm = <span class="fl">TRUE</span>)))
+  ),
+  <span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target</a></span>(<span class="kw">hist</span>, <span class="fu">create_plot</span>(<span class="kw">data</span>)),
+  <span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target</a></span>(<span class="kw">fit</span>, <span class="fu">biglm</span>(<span class="kw">Ozone</span> <span class="op">~</span> <span class="kw">Wind</span> <span class="op">+</span> <span class="kw">Temp</span>, <span class="kw">data</span>)),
+  <span class="fu"><a href="reference/tar_render.html">tar_render</a></span>(<span class="kw">report</span>, <span class="st">"report.Rmd"</span>)
+)
+</pre></div>
+<p>With <a href="https://wlandau.github.io/tarchetypes/reference/tar_plan.html"><code>tar_plan()</code></a>, the simplest targets become super easy to write.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_pipeline.html">tar_pipeline</a></span>(
+  <span class="co"># Needs tar_target() because of format = "file":</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_target.html">tar_target</a></span>(
+    <span class="kw">raw_data_file</span>,
+    <span class="st">"data/raw_data.csv"</span>,
+    format = <span class="st">"file"</span>
+  ),
+  <span class="co"># Simple drake-like syntax:</span>
+  raw_data = <span class="fu">read_csv</span>(<span class="kw">raw_data_file</span>, col_types = <span class="fu">cols</span>()),
+  data =<span class="kw">raw_data</span> <span class="op">%&gt;%</span>
+    <span class="fu">mutate</span>(Ozone = <span class="fu">replace_na</span>(<span class="kw">Ozone</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">Ozone</span>, na.rm = <span class="fl">TRUE</span>))),
+  hist = <span class="fu">create_plot</span>(<span class="kw">data</span>),
+  fit = <span class="fu">biglm</span>(<span class="kw">Ozone</span> <span class="op">~</span> <span class="kw">Wind</span> <span class="op">+</span> <span class="kw">Temp</span>, <span class="kw">data</span>),
+  <span class="co"># Needs tar_render() because it is a target archetype:</span>
+  <span class="fu"><a href="reference/tar_render.html">tar_render</a></span>(<span class="kw">report</span>, <span class="st">"report.Rmd"</span>)
+)
+</pre></div>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the GitHub development version to access the latest features and patches.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://remotes.r-lib.org">remotes</a></span>)
 <span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"wlandau/tarchetypes"</span>)
 </pre></div>
