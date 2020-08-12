@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • tarchetypes</title>
+<title>The drake-plan-like pipeline archetype — tar_plan • tarchetypes</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="The drake-plan-like pipeline archetype — tar_plan" />
+<meta property="og:description" content="Simplify target specification in pipelines." />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -111,136 +112,70 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>The <code>drake</code>-plan-like pipeline archetype</h1>
+    <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_plan.R'><code>R/tar_plan.R</code></a></small>
+    <div class="hidden name"><code>tar_plan.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Simplify target specification in pipelines.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>tar_plan</span>(<span class='kw'>...</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-help" class="hasAnchor"><a href="#section-help" class="anchor"></a>Help</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="tarchetypes-package.html">tarchetypes-package</a></code> </p>
-        </td>
-        <td><p>targets: Archetypes for Targets</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-files" class="hasAnchor"><a href="#section-files" class="anchor"></a>Files</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="tar_files.html">tar_files()</a></code> </p>
-        </td>
-        <td><p>Easy branching over dynamic files.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-literate-programming" class="hasAnchor"><a href="#section-literate-programming" class="anchor"></a>Literate programming</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="tar_knit.html">tar_knit()</a></code> </p>
-        </td>
-        <td><p>Alternative to <code>tar_target()</code> for a <code>knitr</code> document.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tar_render.html">tar_render()</a></code> </p>
-        </td>
-        <td><p>Alternative to <code>tar_target()</code> for an R Markdown document.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-custom-decision-rules" class="hasAnchor"><a href="#section-custom-decision-rules" class="anchor"></a>Custom decision rules</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="tar_change.html">tar_change()</a></code> </p>
-        </td>
-        <td><p>Target that responds to an arbitrary change.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tar_force.html">tar_force()</a></code> </p>
-        </td>
-        <td><p>Target with a custom condition to force execution.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tar_skip.html">tar_skip()</a></code> </p>
-        </td>
-        <td><p>Target with a custom cancellation condition.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-pipeline-archetypes" class="hasAnchor"><a href="#section-pipeline-archetypes" class="anchor"></a>Pipeline archetypes</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="tar_plan.html">tar_plan()</a></code> </p>
-        </td>
-        <td><p>The <code>drake</code>-plan-like pipeline archetype</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Named and unnamed targets. All named targets must follow
+the <code>drake</code>-plan-like <code>target = command</code> syntax, and all unnamed
+arguments must be explicit calls to create target objects,
+e.g. <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code>, target archetypes like <code><a href='tar_render.html'>tar_render()</a></code>, or similar.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='https://rdrr.io/pkg/targets/man/tar_pipeline.html'>targets::tar_pipeline()</a></code> object.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Allows targets with just targets and commands
+to be written in the pipeline as <code>target = command</code> instead of
+<code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target(target, command)</a></code>. Also supports ordinary
+target objects if they are unnamed.
+<code>tar_plan(x = 1, y = 2, tar_target(z, 3), tar_render(r, "r.Rmd"))</code>
+is equivalent to
+<code>tar_plan(tar_target(x, 1), tar_target(y, 2), tar_target(z, 3), tar_render(r, "r.Rmd"))</code>. # nolint</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_dir.html'>tar_dir</a></span>({
+<span class='kw'>lines</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+  <span class='st'>"---"</span>,
+  <span class='st'>"title: report"</span>,
+  <span class='st'>"output_format: html_document"</span>,
+  <span class='st'>"---"</span>,
+  <span class='st'>""</span>,
+  <span class='st'>"```{r}"</span>,
+  <span class='st'>"targets::tar_read(data)"</span>,
+  <span class='st'>"```"</span>
+)
+<span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span>(<span class='kw'>lines</span>, <span class='st'>"report.Rmd"</span>)
+<span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_script.html'>tar_script</a></span>({
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://wlandau.github.io/tarchetypes'>tarchetypes</a></span>)
+  <span class='fu'>tar_plan</span>(
+    data = <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fl'>26</span>), y = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>26</span>)),
+    means = <span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>data</span>),
+    <span class='fu'><a href='tar_render.html'>tar_render</a></span>(<span class='kw'>report</span>, <span class='st'>"report.Rmd"</span>)
+  )
+})
+<span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_make.html'>tar_make</a></span>()
+})
+}</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
