@@ -115,7 +115,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Target formats</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_formats.R'><code>R/tar_formats.R</code></a>, <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_rds.R'><code>R/tar_rds.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_formats.R'><code>R/tar_formats.R</code></a></small>
     <div class="hidden name"><code>tar_formats.Rd</code></div>
     </div>
 
@@ -123,7 +123,121 @@
     <p>Target archetypes for specialized storage formats.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tar_rds</span>(
+    <pre class="usage"><span class='fu'>tar_file</span>(
+  <span class='kw'>name</span>,
+  <span class='kw'>command</span>,
+  pattern = <span class='kw'>NULL</span>,
+  tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
+  packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
+  library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
+  iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
+  memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
+  deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
+  priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>)
+)
+
+<span class='fu'>tar_rds</span>(
+  <span class='kw'>name</span>,
+  <span class='kw'>command</span>,
+  pattern = <span class='kw'>NULL</span>,
+  tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
+  packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
+  library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
+  iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
+  memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
+  deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
+  priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>)
+)
+
+<span class='fu'>tar_qs</span>(
+  <span class='kw'>name</span>,
+  <span class='kw'>command</span>,
+  pattern = <span class='kw'>NULL</span>,
+  tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
+  packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
+  library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
+  iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
+  memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
+  deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
+  priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>)
+)
+
+<span class='fu'>tar_fst</span>(
+  <span class='kw'>name</span>,
+  <span class='kw'>command</span>,
+  pattern = <span class='kw'>NULL</span>,
+  tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
+  packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
+  library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
+  iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
+  memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
+  deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
+  priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>)
+)
+
+<span class='fu'>tar_fst_dt</span>(
+  <span class='kw'>name</span>,
+  <span class='kw'>command</span>,
+  pattern = <span class='kw'>NULL</span>,
+  tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
+  packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
+  library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
+  iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
+  memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
+  deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
+  priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>)
+)
+
+<span class='fu'>tar_fst_tbl</span>(
+  <span class='kw'>name</span>,
+  <span class='kw'>command</span>,
+  pattern = <span class='kw'>NULL</span>,
+  tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
+  packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
+  library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
+  iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
+  error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
+  memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
+  deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
+  priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
+  resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
+  storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
+  retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
+  cue = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"cue"</span>)
+)
+
+<span class='fu'>tar_keras</span>(
   <span class='kw'>name</span>,
   <span class='kw'>command</span>,
   pattern = <span class='kw'>NULL</span>,
