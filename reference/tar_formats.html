@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Target with a custom cancellation condition. — tar_skip • tarchetypes</title>
+<title>Target formats — tar_formats • tarchetypes</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Target with a custom cancellation condition. — tar_skip" />
-<meta property="og:description" content="Create a target that cancels itself if a user-defined
-decision rule is met." />
+<meta property="og:title" content="Target formats — tar_formats" />
+<meta property="og:description" content="Target archetypes for specialized storage formats." />
 
 
 
@@ -115,24 +114,22 @@ decision rule is met." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Target with a custom cancellation condition.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_skip.R'><code>R/tar_skip.R</code></a></small>
-    <div class="hidden name"><code>tar_skip.Rd</code></div>
+    <h1>Target formats</h1>
+    <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_formats.R'><code>R/tar_formats.R</code></a>, <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_rds.R'><code>R/tar_rds.R</code></a></small>
+    <div class="hidden name"><code>tar_formats.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a target that cancels itself if a user-defined
-decision rule is met.</p>
+    <p>Target archetypes for specialized storage formats.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tar_skip</span>(
+    <pre class="usage"><span class='fu'>tar_rds</span>(
   <span class='kw'>name</span>,
   <span class='kw'>command</span>,
-  <span class='kw'>skip</span>,
+  pattern = <span class='kw'>NULL</span>,
   tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
   packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
   library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
-  format = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"format"</span>),
   iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
   error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
   memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
@@ -150,25 +147,26 @@ decision rule is met.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>Character of length 1, name of the target.</p></td>
+      <td><p>Symbol, name of the target.</p></td>
     </tr>
     <tr>
       <th>command</th>
-      <td><p>Similar to the <code>command</code> argument of <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code> except
-the object must already be an expression instead of
-informally quoted code.
-<code><a href='https://rdrr.io/r/base/expression.html'>base::expression()</a></code> and <code><a href='https://rdrr.io/r/base/substitute.html'>base::quote()</a></code> can produce such objects.</p></td>
+      <td><p>R code to run the target.</p></td>
     </tr>
     <tr>
-      <th>skip</th>
-      <td><p>R code for the skipping condition. If it evaluates to <code>TRUE</code>
-during <code><a href='https://rdrr.io/pkg/targets/man/tar_make.html'>tar_make()</a></code>, the target will cancel itself.</p></td>
+      <th>pattern</th>
+      <td><p>Language to define branching for a target.
+For example, in a pipeline with numeric vector targets <code>x</code> and <code>y</code>,
+<code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target(z, x + y, pattern = map(x, y))</a></code> implicitly defines
+branches of <code>z</code> that each compute <code>x[1] + y[1]</code>, <code>x[2] + y[2]</code>,
+and so on. See the user manual for details.</p></td>
     </tr>
     <tr>
       <th>tidy_eval</th>
-      <td><p>Whether to invoke tidy evaluation
-(e.g. the <code>!!</code> operator from <code>rlang</code>) as soon as the target is defined
-(before <code><a href='https://rdrr.io/pkg/targets/man/tar_make.html'>tar_make()</a></code>). Applies to arguments <code>command</code> and <code>skip</code>.</p></td>
+      <td><p>Logical, whether to enable tidy evaluation
+when interpreting <code>expr</code>. If <code>TRUE</code>, you can use the
+"bang-bang" operator <code>!!</code> to programmatically insert
+the values of global objects.</p></td>
     </tr>
     <tr>
       <th>packages</th>
@@ -180,33 +178,6 @@ globally for all subsequent targets you define.</p></td>
       <th>library</th>
       <td><p>Character vector of library paths to try
 when loading <code>packages</code>.</p></td>
-    </tr>
-    <tr>
-      <th>format</th>
-      <td><p>Optional storage format for the target's return value.
-With the exception of <code>format = "file"</code>, each target
-gets a file in <code>_targets/objects</code>, and each format is a different
-way to save and load this file.
-Possible formats:</p><ul>
-<li><p><code>"file"</code>: A dynamic file. To use this format,
-the target needs to manually identify or save some data
-and return a character vector of paths
-to the data. Those paths must point to files or directories,
-and they must not contain characters <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> or <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code>.
-Then, <code>targets</code> automatically checks those files and cues the
-appropriate build decisions if those files are out of date.</p></li>
-<li><p><code>"rds"</code>: Default, uses <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS()</a></code> and <code><a href='https://rdrr.io/r/base/readRDS.html'>readRDS()</a></code>. Should work for
-most objects, but slow.</p></li>
-<li><p><code>"qs"</code>: Uses <code>qs::qsave()</code> and <code>qs::qread()</code>. Should work for
-most objects, much faster than <code>"rds"</code>.</p></li>
-<li><p><code>"fst"</code>: Uses <code>fst::write_fst()</code> and <code>fst::read_fst()</code>.
-Much faster than <code>"rds"</code>, but the value must be
-a data frame.</p></li>
-<li><p><code>"fst_dt"</code>: Same as <code>"fst"</code>, but the value is a <code>data.table</code>.</p></li>
-<li><p><code>"fst_tbl"</code>: Same as <code>"fst"</code>, but the value is a <code>tibble</code>.</p></li>
-<li><p><code>"keras"</code>: Uses <code>keras::save_model_hdf5()</code> and
-<code>keras::load_model_hdf5()</code>. The value must be a Keras model.</p></li>
-</ul></td>
     </tr>
     <tr>
       <th>iteration</th>
@@ -295,34 +266,23 @@ rules that decide whether the target is up to date.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A target with <code><a href='https://rdrr.io/pkg/targets/man/tar_cancel.html'>targets::tar_cancel(your_condition)</a></code> inserted
-into the command.</p>
+    <p>A <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>tar_skip()</code> creates a target that cancels itself
-whenever a custom condition is met. The mechanism of cancellation
-is <code><a href='https://rdrr.io/pkg/targets/man/tar_cancel.html'>targets::tar_cancel(your_condition)</a></code>, which allows skipping to happen
-even if the target does not exist yet. This behavior differs from
-<code><a href='https://rdrr.io/pkg/targets/man/tar_cue.html'>tar_cue(mode = "never")</a></code>, which still runs if the target does not exist.</p>
+    <p>These functions are shorthand for targets with specialized
+storage formats. For example, <code>tar_qs(name, fun())</code> is equivalent to
+<code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target(name, fun(), format = "qs")</a></code>.
+For details on specialized storage formats, open the help file of the
+<code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>targets::tar_target()</a></code> function and read about the <code>format</code> argument.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Without loss of generality,</span>
-<span class='fu'>tar_skip</span>(<span class='kw'>your_target</span>, command = <span class='fu'>run_stuff</span>(), skip = <span class='fu'>should_skip</span>())
-<span class='co'># is equivalent to:</span>
-<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target</a></span>(<span class='kw'>your_target</span>, {
-  <span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_cancel.html'>tar_cancel</a></span>(<span class='fu'>should_skip</span>())
-  <span class='fu'>run_stuff</span>()
-})
-<span class='co'># Try it out.</span>
-<span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_dir.html'>tar_dir</a></span>({
-<span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_script.html'>tar_script</a></span>({
+<span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_script.html'>tar_script</a></span>(
   <span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_pipeline.html'>tar_pipeline</a></span>(
-    <span class='kw'>tarchetypes</span>::<span class='fu'>tar_skip</span>(<span class='kw'>x</span>, command = <span class='st'>"value"</span>, skip = <span class='fl'>1</span> <span class='op'>&gt;</span> <span class='fl'>0</span>)
+    <span class='fu'>tar_rds</span>(<span class='kw'>x</span>, <span class='fl'>1</span>) <span class='co'># equivalent to tar_target(x, 1, format = "rds")</span>
   )
-})
+)
 <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_make.html'>tar_make</a></span>()
-})
 }
 </div></pre>
   </div>

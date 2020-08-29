@@ -136,9 +136,9 @@ in an arbitrary value. If the value changes, the target reruns.</p>
   iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
   error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
   memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
-  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
   deployment = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"deployment"</span>),
   priority = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"priority"</span>),
+  template = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"template"</span>),
   resources = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"resources"</span>),
   storage = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"storage"</span>),
   retrieval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"retrieval"</span>),
@@ -242,15 +242,6 @@ Either way, the target gets automatically loaded into memory
 whenever another target needs the value.</p></td>
     </tr>
     <tr>
-      <th>template</th>
-      <td><p>Relevant to <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code> only.
-Named list of values to fill in the <code>clustermq</code> template file.
-Unsupported for now. May be supported in the future if
-<code>clustermq</code> ever supports heterogeneous workers with varying
-resource requirements. In the meantime, use the <code>template</code>
-argument of <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code>.</p></td>
-    </tr>
-    <tr>
       <th>deployment</th>
       <td><p>Character of length 1, only relevant to
 <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code> and <code><a href='https://rdrr.io/pkg/targets/man/tar_make_future.html'>tar_make_future()</a></code>. If <code>"remote"</code>,
@@ -262,6 +253,15 @@ the target builds on the host machine / process managing the pipeline.</p></td>
       <td><p>Numeric of length 1 between 0 and 1. Controls which
 targets get deployed first when multiple competing targets are ready
 simultaneously. Targets with priorities closer to 1 get built earlier.</p></td>
+    </tr>
+    <tr>
+      <th>template</th>
+      <td><p>Relevant to <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code> only.
+Named list of values to fill in the <code>clustermq</code> template file.
+Unsupported for now. May be supported in the future if
+<code>clustermq</code> ever supports heterogeneous workers with varying
+resource requirements. In the meantime, use the <code>template</code>
+argument of <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code>.</p></td>
     </tr>
     <tr>
       <th>resources</th>
