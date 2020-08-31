@@ -239,10 +239,12 @@ without invalidating the target).</p>
 should mention dependency targets with <code><a href='https://rdrr.io/pkg/targets/man/tar_load.html'>tar_load()</a></code> and <code><a href='https://rdrr.io/pkg/targets/man/tar_read.html'>tar_read()</a></code>
 in the active code chunks (which also allows you to knit the report
 outside the pipeline if the <code>_targets/</code> data store already exists).
+(Do not use <code><a href='https://rdrr.io/pkg/targets/man/tar_load_raw.html'>tar_load_raw()</a></code> or <code><a href='https://rdrr.io/pkg/targets/man/tar_read_raw.html'>tar_read_raw()</a></code> for this.)
 Then, <code>tar_knit()</code> defines a special kind of target. It
 1. Finds all the <code><a href='https://rdrr.io/pkg/targets/man/tar_load.html'>tar_load()</a></code>/<code><a href='https://rdrr.io/pkg/targets/man/tar_read.html'>tar_read()</a></code> dependencies in the report
 and inserts them into the target's command.
 This enforces the proper dependency relationships.
+(Do not use <code><a href='https://rdrr.io/pkg/targets/man/tar_load_raw.html'>tar_load_raw()</a></code> or <code><a href='https://rdrr.io/pkg/targets/man/tar_read_raw.html'>tar_read_raw()</a></code> for this.)
 2. Sets <code>format = "file"</code> (see <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target()</a></code>) so <code>targets</code>
 watches the files at the returned paths and reruns the report
 if those files change.
