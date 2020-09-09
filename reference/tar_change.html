@@ -306,15 +306,15 @@ if the auxiliary value changes. The behavior is cancelled if
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Without loss of generality,</span>
-<span class='fu'>tar_change</span>(<span class='kw'>your_target</span>, command = <span class='fu'>fun</span>(), change = <span class='fu'>aux</span>())
+<span class='co'># tar_change(your_target, command = fun(), change = aux())</span>
 <span class='co'># is equivalent to:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target</a></span>(<span class='kw'>your_target_change</span>, <span class='fu'>aux</span>(), cue = <span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_cue.html'>tar_cue</a></span>(mode = <span class='st'>"always"</span>)),
-  <span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>tar_target</a></span>(<span class='kw'>your_target</span>, {
-    <span class='kw'>x_change</span>
-    <span class='fu'>fun</span>()
-  })
-)
+<span class='co'># list(</span>
+<span class='co'>#   tar_target(your_target_change, aux(), cue = tar_cue(mode = "always")),</span>
+<span class='co'>#   tar_target(your_target, {</span>
+<span class='co'>#     x_change</span>
+<span class='co'>#     fun()</span>
+<span class='co'>#   })</span>
+<span class='co'># )</span>
 <span class='co'># Try it out. The following pipeline should always run</span>
 <span class='co'># both targets (x and x_change).</span>
 <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_dir.html'>tar_dir</a></span>({
