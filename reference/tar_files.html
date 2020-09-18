@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Easy branching over dynamic files. — tar_files • tarchetypes</title>
+<title>Easy branching over dynamic files or urls. — tar_files • tarchetypes</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Easy branching over dynamic files. — tar_files" />
+<meta property="og:title" content="Easy branching over dynamic files or urls. — tar_files" />
 <meta property="og:description" content="Shorthand for a pattern that correctly
-branches over files." />
+branches over files or urls." />
 
 
 
@@ -115,14 +115,14 @@ branches over files." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Easy branching over dynamic files.</h1>
+    <h1>Easy branching over dynamic files or urls.</h1>
     <small class="dont-index">Source: <a href='https://github.com/wlandau/tarchetypes/blob/master/R/tar_files.R'><code>R/tar_files.R</code></a></small>
     <div class="hidden name"><code>tar_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Shorthand for a pattern that correctly
-branches over files.</p>
+branches over files or urls.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tar_files</span>(
@@ -131,7 +131,7 @@ branches over files.</p>
   tidy_eval = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"tidy_eval"</span>),
   packages = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"packages"</span>),
   library = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"library"</span>),
-  format = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"format"</span>),
+  format = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"file"</span>, <span class='st'>"url"</span>),
   iteration = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"iteration"</span>),
   error = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"error"</span>),
   memory = <span class='kw'>targets</span>::<span class='fu'><a href='https://rdrr.io/pkg/targets/man/tar_option_get.html'>tar_option_get</a></span>(<span class='st'>"memory"</span>),
@@ -173,40 +173,8 @@ when loading <code>packages</code>.</p></td>
     </tr>
     <tr>
       <th>format</th>
-      <td><p>Optional storage format for the target's return value.
-With the exception of <code>format = "file"</code>, each target
-gets a file in <code>_targets/objects</code>, and each format is a different
-way to save and load this file.
-Possible formats:</p><ul>
-<li><p><code>"rds"</code>: Default, uses <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS()</a></code> and <code><a href='https://rdrr.io/r/base/readRDS.html'>readRDS()</a></code>. Should work for
-most objects, but slow.</p></li>
-<li><p><code>"qs"</code>: Uses <code>qs::qsave()</code> and <code>qs::qread()</code>. Should work for
-most objects, much faster than <code>"rds"</code>.</p></li>
-<li><p><code>"fst"</code>: Uses <code>fst::write_fst()</code> and <code>fst::read_fst()</code>.
-Much faster than <code>"rds"</code>, but the value must be
-a data frame.</p></li>
-<li><p><code>"fst_dt"</code>: Same as <code>"fst"</code>, but the value is a <code>data.table</code>.</p></li>
-<li><p><code>"fst_tbl"</code>: Same as <code>"fst"</code>, but the value is a <code>tibble</code>.</p></li>
-<li><p><code>"keras"</code>: Uses <code>keras::save_model_hdf5()</code> and
-<code>keras::load_model_hdf5()</code>. The value must be a Keras model.</p></li>
-<li><p><code>"file"</code>: A dynamic file. To use this format,
-the target needs to manually identify or save some data
-and return a character vector of paths
-to the data. Those paths must point to files or directories,
-and they must not contain characters <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> or <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code>.
-Then, <code>targets</code> automatically checks those files and cues the
-appropriate build decisions if those files are out of date.</p></li>
-<li><p><code>"url"</code>: A dynamic input URL. It works like <code>format = "file"</code>
-except the return value of the target is a URL that already exists
-and serves as input data for downstream targets.
-The data at the URL needs to have an ETag or a Last-Modified
-time stamp, or else the target will throw an error because
-it cannot track the data. Also, use extreme caution when
-trying to use <code>format = "url"</code> to track uploads. You must be absolutely
-certain the ETag and Last-Modified time stamp are fully updated
-and available by the time the target's command finishes running.
-<code>targets</code> makes no attempt to wait for the web server.</p></li>
-</ul></td>
+      <td><p>Character, either <code>"file"</code> or <code>"url"</code>. See the <code>format</code>
+argument of <code><a href='https://rdrr.io/pkg/targets/man/tar_target.html'>targets::tar_target()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>iteration</th>
@@ -257,12 +225,17 @@ simultaneously. Targets with priorities closer to 1 get built earlier.</p></td>
     </tr>
     <tr>
       <th>resources</th>
-      <td><p>A named list of computing resources
-for high-performance computing. Elements in this list are passed
-to <code>future::future()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_future.html'>tar_make_future()</a></code> and
-to <code>clustermq::workers()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code>
-to fill in the patterns in cluster computing
-template files with user-defined values.</p></td>
+      <td><p>A named list of computing resources. Uses:</p><ul>
+<li><p>Template file wildcards for <code>future::future()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_future.html'>tar_make_future()</a></code>.</p></li>
+<li><p>Template file wildcards <code>clustermq::workers()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code>.</p></li>
+<li><p>Custom <code>curl</code> handle if <code>format = "url"</code>,
+e.g. <code>resources = list(handle = curl::new_handle())</code>.</p></li>
+<li><p>Custom preset for <code>qs::qsave()</code> if <code>format = "qs"</code>, e.g.
+<code>resources = list(handle = "archive")</code>.</p></li>
+<li><p>Custom compression level for <code>fst::write_fst()</code> if
+<code>format</code> is <code>"fst"</code>, <code>"fst_dt"</code>, or <code>"fst_tbl"</code>, e.g.
+<code>resources = list(compress = 100)</code>.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>storage</th>
@@ -291,16 +264,18 @@ rules that decide whether the target is up to date.</p></td>
 
     <p>A list of two targets, one upstream and one downstream.
 The upstream one does some work and returns some file paths,
-and the downstream target is a pattern that applies <code>format = "file"</code>.</p>
+and the downstream target is a pattern that applies <code>format = "file"</code>
+or <code>format = "url"</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>tar_files()</code> creates a pair of targets, one upstream
 and one downstream. The upstream target does some work
 and returns some file paths, and the downstream
-target is a pattern that applies <code>format = "file"</code>.
+target is a pattern that applies <code>format = "file"</code>
+or <code>format = "url"</code>.
 This is the correct way to dynamically
-iterate over file targets. It makes sure any downstream patterns
-only rerun some of their branches if the files change.
+iterate over file/url targets. It makes sure any downstream patterns
+only rerun some of their branches if the files/urls change.
 For more information, visit
 <a href='https://github.com/wlandau/targets/issues/136'>https://github.com/wlandau/targets/issues/136</a> and
 <a href='https://github.com/ropensci/drake/issues/1302'>https://github.com/ropensci/drake/issues/1302</a>.</p>

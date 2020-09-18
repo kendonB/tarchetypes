@@ -335,12 +335,17 @@ simultaneously. Targets with priorities closer to 1 get built earlier.</p></td>
     </tr>
     <tr>
       <th>resources</th>
-      <td><p>A named list of computing resources
-for high-performance computing. Elements in this list are passed
-to <code>future::future()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_future.html'>tar_make_future()</a></code> and
-to <code>clustermq::workers()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code>
-to fill in the patterns in cluster computing
-template files with user-defined values.</p></td>
+      <td><p>A named list of computing resources. Uses:</p><ul>
+<li><p>Template file wildcards for <code>future::future()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_future.html'>tar_make_future()</a></code>.</p></li>
+<li><p>Template file wildcards <code>clustermq::workers()</code> in <code><a href='https://rdrr.io/pkg/targets/man/tar_make_clustermq.html'>tar_make_clustermq()</a></code>.</p></li>
+<li><p>Custom <code>curl</code> handle if <code>format = "url"</code>,
+e.g. <code>resources = list(handle = curl::new_handle())</code>.</p></li>
+<li><p>Custom preset for <code>qs::qsave()</code> if <code>format = "qs"</code>, e.g.
+<code>resources = list(handle = "archive")</code>.</p></li>
+<li><p>Custom compression level for <code>fst::write_fst()</code> if
+<code>format</code> is <code>"fst"</code>, <code>"fst_dt"</code>, or <code>"fst_tbl"</code>, e.g.
+<code>resources = list(compress = 100)</code>.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>storage</th>
