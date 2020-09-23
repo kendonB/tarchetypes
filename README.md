@@ -121,7 +121,7 @@ With
 the simplest targets become super easy to write.
 
 ``` r
-tar_pipeline(
+tar_plan(
   # Needs tar_target() because of format = "file":
   tar_target(
     raw_data_file,
